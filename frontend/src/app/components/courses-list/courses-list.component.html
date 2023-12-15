@@ -1,0 +1,49 @@
+<div class="course-logo">
+  <h1>Courses</h1>
+</div>
+
+<div class="wrapper">
+  <div class="filter-block">
+    <div>
+      <label for="filterBy">Filter by:</label>
+      <select id="filterBy" (change)="applyFilters()" [(ngModel)]="selectedFilter" class="filter-block-select">
+        <option value="all">All</option>
+        <option value="in progress">In Progress</option>
+        <option value="new">New</option>
+        <option value="completed">Completed</option>
+      </select>
+      <button class="filter-block-clear" (click)="clearFilters()">Clear</button>
+    </div>
+    <div>
+      <input type="text" placeholder="Search by name" (change)="applyFilters()" [(ngModel)]="searchTerm" class="filter-block-input"/>
+    </div>
+  </div>
+  <div class="courses-block">
+    <div class="courses-block-nav">
+      <div class="courses-block-nav-first">
+        <div class="courses-block-list-id">ID</div>
+        <div class="courses-block-list-image">Image</div>
+        <div>Name</div>
+      </div>
+      <div class="courses-block-list-status">Status</div>
+    </div>
+    <div *ngFor="let course of filteredCourses" class="courses-block-list">
+      <div class="courses-block-nav-first">
+        <div class="courses-block-list-id">{{ course.id }}</div>
+        <div class="courses-block-list-image"><img [src]="course.imageUrl" alt="Course Image" width="100" height="60"/>
+        </div>
+        <div>
+          <div class="courses-block-list-name" id="courses-block-list-name" (click)="navigateToCourseDetail(course.id)">{{ course.name }}</div>
+          <div class="courses-block-list-instructors">
+            <b>Instructors:&nbsp;</b>
+            <ng-container *ngFor="let instructor of course.instructors; let last = last">
+              <div>{{instructor.name}}</div>
+              <div *ngIf="!last">,&nbsp;</div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+      <div class="courses-block-list-status-green">{{ course.status }}</div>
+    </div>
+  </div>
+</div>

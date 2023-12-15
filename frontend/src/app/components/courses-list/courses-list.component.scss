@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap');
+
+$font-family: 'Open Sans', sans-serif;
+$primary-color: blue;
+$hover-color: red;
+$background-color: #f8f9fa;
+
+.course-logo {
+  margin-top: 10%;
+  font-family: $font-family;
+}
+
+.wrapper {
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  font-family: $font-family;
+  background: white;
+}
+
+.filter-block {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.filter-block-select {
+  margin-left: 10px;
+  margin-right: 20px;
+  background: $background-color;
+  width: 120px;
+  height: 40px;
+  border-radius: 5px;
+  border: solid 10px $background-color;
+  color: gray;
+}
+
+.filter-block-clear {
+  color: $primary-color;
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-family: $font-family;
+  font-weight: 500;
+}
+
+.filter-block-clear:hover {
+  color: $hover-color;
+}
+
+.filter-block-input {
+  background: $background-color;
+  width: 120px;
+  height: 20px;
+  border-radius: 5px;
+  border: solid 10px $background-color;
+  color: gray;
+}
+
+.courses-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.courses-block-nav {
+  background: $background-color;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 20px;
+}
+
+.courses-block-nav-first {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.courses-block-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.courses-block-list-id {
+  min-width: 50px;
+}
+
+.courses-block-list-image {
+  min-width: 120px;
+}
+
+.courses-block-list-status {
+  min-width: 100px;
+}
+
+.courses-block-list-status-green {
+  min-width: 100px;
+  padding: 3px 0;
+  border: 2px solid green;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.courses-block-list-name {
+  color: $primary-color;
+}
+
+.courses-block-list-name:hover {
+  color: $hover-color;
+}
+
+.courses-block-list-instructors {
+  display: flex;
+  padding-top: 10px;
+  font-size: 12px;
+}

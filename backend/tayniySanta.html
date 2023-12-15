@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тайный Санта</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #participantsList {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    #participantsList h2 {
+      color: #333;
+    }
+
+    #participantsList div {
+      margin-bottom: 10px;
+    }
+
+    input {
+      padding: 5px;
+      margin-right: 10px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      margin-bottom: 100px;
+    }
+
+    #result p {
+      margin-bottom: 20px;
+    }
+
+    #result h2 {
+      color: #333;
+    }
+
+    p {
+      margin: 0;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+<h1>Тайный Санта</h1>
+
+<div id="participantsList"></div>
+
+<button onclick="calculateSecretSanta()" id="calculate">Рассчитать</button>
+
+<div id="result"></div>
+
+<script>
+  let participantsData = [];
+
+  function addWish(index) {
+    const wishInput = document.getElementById(`wish${index}`);
+    const successMessage = document.getElementById(`successMessage${index}`);
+
+    participantsData[index].wish = wishInput.value.trim();
+    successMessage.textContent = 'Пожелание добавлено!';
+  }
+
+  function renderParticipantsList() {
+    const participantsListDiv = document.getElementById('participantsList');
+    participantsListDiv.innerHTML = '<h2>Участники и пожелания:</h2>';
+
+    participantsData.forEach((participant, index) => {
+      participantsListDiv.innerHTML += `
+                    <div>
+                        <p>${participant.name}</p>
+                        <input type="text" id="wish${index}" placeholder="Введите пожелание">
+                        <button onclick="addWish(${index})">Добавить</button>
+                        <span id="successMessage${index}"></span>
+                    </div>
+                `;
+    });
+  }
+
+  function calculateSecretSanta() {
+    if (participantsData.length < 2 || participantsData.some(participant => !participant.wish)) {
+      alert('Добавьте пожелания для всех участников.');
+      return;
+    }
+
+    let shuffledParticipants;
+    let assignments;
+
+    while (true) {
+      shuffledParticipants = shuffle(participantsData.slice());
+      assignments = [];
+
+      let allDifferent = true;
+
+      for (let i = 0; i < participantsData.length; i++) {
+        const giver = participantsData[i].name;
+        const receiver = shuffledParticipants[i].name;
+
+        // Проверка, чтобы человек не дарил подарок самому себе
+        if (giver === receiver) {
+          allDifferent = false;
+          break;
+        }
+
+        if ((giver === 'Катя' && receiver === 'Егор Гоцуляк') || (giver === 'Егор Гоцуляк' && receiver === 'Катя') ||
+                (giver === 'Андрей' && receiver === 'Дарина') || (giver === 'Дарина' && receiver === 'Андрей')) {
+          allDifferent = false;
+          break;
+        }
+
+        assignments.push({
+          giver: giver,
+          receiver: receiver,
+          wish: shuffledParticipants[i].wish
+        });
+      }
+
+      if (allDifferent) {
+        break;
+      }
+    }
+
+    displayResult(assignments);
+  }
+
+
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  }
+
+  function displayResult(assignments) {
+    const resultDiv = document.getElementById('result');
+    const calculateBtn = document.getElementById('calculate').style.visibility = 'hidden';
+    resultDiv.innerHTML = '<h2>Результаты:</h2>';
+
+    assignments.forEach(assignment => {
+      resultDiv.innerHTML += `<p>${assignment.giver} дарит подарок ${assignment.receiver} с пожеланием: "${assignment.wish}"</p>`;
+    });
+  }
+
+  // Исходные данные
+  participantsData = [
+    { name: 'Артем', wish: '' },
+    { name: 'Рома', wish: '' },
+    { name: 'Леша', wish: '' },
+    { name: 'Маша', wish: '' },
+    { name: 'Катя', wish: '' },
+    { name: 'Егор Малец', wish: '' },
+    { name: 'Егор Гоцуляк', wish: '' },
+    { name: 'Аня', wish: '' },
+    { name: 'Дарина', wish: '' },
+    { name: 'Андрей', wish: '' }
+  ];
+
+  renderParticipantsList();
+</script>
+</body>
+</html>
