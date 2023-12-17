@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap');
-
-$font-family: 'Open Sans', sans-serif;
-$primary-color: blue;
-$hover-color: red;
-$background-color: #f8f9fa;
+@import "../../../assets/variables";
 
 .course-logo {
   margin-top: 10%;
