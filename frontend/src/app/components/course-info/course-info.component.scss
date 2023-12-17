@@ -1,13 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&display=swap');
-
-$primary-color: #2e99f1;
-$info-block-bg: #f8f9fa;
-$info-block-instructors-bg: white;
+@import "../../../assets/variables";
 
 .course-logo {
   margin-top: 10%;
-  font-family: 'Open Sans', sans-serif;
-
   h1 span {
     color: $primary-color;
   }
@@ -16,7 +11,6 @@ $info-block-instructors-bg: white;
 .wrapper {
   border-radius: 10px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-  font-family: 'Open Sans', sans-serif;
   background: white;
   padding: 20px;
   display: flex;
@@ -52,7 +46,6 @@ $info-block-instructors-bg: white;
     border: none;
     background: $info-block-bg;
     font-size: 16px;
-    font-family: 'Open Sans', sans-serif;
   }
 
   .info-block-instructors {

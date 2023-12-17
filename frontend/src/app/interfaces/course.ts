@@ -1,9 +1,11 @@
-import {Instructor} from "./instructor";
+import { Instructor } from './instructor';
 
 export interface Course {
   id: number;
   name: string;
   imageUrl: string;
   instructors: Instructor[];
-  status: string;
+  status: CourseStatus;
 }
+
+export type CourseStatus = 'Completed' | 'New' | 'In Progress' | 'All';
